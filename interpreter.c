@@ -1,59 +1,34 @@
 #include "monty.h"
 
 /**
- * main - interpretes the bytecode
- * @ac: arg counter
- * @av: arg vector
- * Return: Exit Status
+ * interpret - interprets the opcode
+ * @line: where the opcode is
  */
-int main(int ac, char **av)
+void interpret(char *line)
 {
-	FILE *file;
-	char *filename, *line = NULL;
-	size_t i, len = 0;
-	unsigned int line_number = 0;
-	ssize_t read;
+	char *token, *op_word;
+	int value, i;
 
-	instruction_t opcodes[] = {
+	instruction_t opc[] = {
 		{"push", opcode_push},
 		{"pall", opcode_pall}
 	};
 
-	if (ac != 2)
+	for (i = 0; i < sizeof(opc) / sizeof(opc[0]); i++)
 	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-
-	/* Opening the monty bytecode file */
-	filename = av[1];
-	file = fopen(filename, "r");
-	if (file == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", filename);
-		exit(EXIT_FAILURE);
-	}
-
-	/* read each line of the file */
-	while ((read = getline(&line, &len, file)) != -1)
-	{
-		line_number++;
-		stack_t *stack;
-
-		/* line contains push */
-		for (i = 0; i < sizeof(opcodes) / sizeof(opcodes[0]); i++)
+		op_word = strstr(line, opc[i].opcode);
+		if (op_word != NULL)
 		{
-			if (strstr(line, opcodes[i].opcode) != NULL)
-			{
-				char *token = strtok(strstr(line, opcodes[i].opcode) + strlen(opcodes[i].opcode), " ");
-				int value = = atoi(token);
+			token = strtok(op_word + strlen(opc[i].opcode), " ");
+			value = atoi(token);
 
-				stack->n = value;
-				opcodes[i].f(&stack, line_number);
+			stack_t *new_stack = malloc(sizeof(stack_t));
+
+			if (new_stack == NULL)
+			{
+				fprintf(stderr, "Error: malloc failed\n");
+				exit(EXIT_FAILURE);
 			}
 		}
 	}
-
-	fclose(file);
-	return (EXIT_SUCCESS);
 }
