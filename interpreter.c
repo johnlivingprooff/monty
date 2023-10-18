@@ -8,9 +8,8 @@
  */
 void interpret(char *line, stack_t **stack, unsigned int line_number)
 {
-	char *token, *op_word;
-	size_t value, i;
-	stack_t *new_stack;
+	char *op_word;
+	size_t i;
 
 	instruction_t opc[] = {
 		{"push", opcode_push},
@@ -19,29 +18,11 @@ void interpret(char *line, stack_t **stack, unsigned int line_number)
 
 	for (i = 0; i < sizeof(opc) / sizeof(opc[0]); i++)
 	{
-		op_word = strstr(line, opc[i].opcode);
+		op_word = strtok(line, " \n\t\r");
 		if (op_word != NULL)
 		{
-			token = strtok(op_word + strlen(opc[i].opcode), " ");
-			value = atoi(token);
-
-			new_stack = malloc(sizeof(stack_t));
-
-			if (new_stack == NULL)
-			{
-				fprintf(stderr, "Error: malloc failed\n");
-				exit(EXIT_FAILURE);
-			}
-
-			new_stack->n = value;
-			new_stack->prev = NULL;
-			new_stack->next = *stack;
-
-			if (*stack != NULL)
-				(*stack)->prev = new_stack;
-			*stack = new_stack;
-
-			opc[i].f(stack, line_number);
+			if (strcmp(op_word, opc[i].opcode) == 0)
+				opc[i].f(stack, line_number);
 		}
 	}
 }
