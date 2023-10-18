@@ -10,14 +10,10 @@ int main(int ac, char **av)
 {
 	FILE *file;
 	char *filename, *line = NULL;
-	size_t i, len = 0;
 	unsigned int line_number = 0;
 	ssize_t read;
-
-	instruction_t opcodes[] = {
-		{"push", opcode_push},
-		{"pall", opcode_pall}
-	};
+	size_t len = 0;
+	stack_t *stack = NULL;
 
 	if (ac != 2)
 	{
@@ -35,7 +31,11 @@ int main(int ac, char **av)
 	}
 
 	/* read each line of the file */
-	read_line(file);
+	while ((read = getline(&line, &len, file)) != -1)
+	{
+		line_number++;
+		interpret(line, &stack, line_number);
+	}
 
 	fclose(file);
 	return (EXIT_SUCCESS);
