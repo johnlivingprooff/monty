@@ -13,7 +13,7 @@ int main(int ac, char **av)
 	char line[1024];
 
 	unsigned int line_number = 0;
-	
+
 	stack_t *stack = NULL;
 
 	if (ac != 2)
