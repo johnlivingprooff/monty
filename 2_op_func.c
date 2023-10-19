@@ -19,11 +19,12 @@ void opcode_add(stack_t **stack, unsigned int line_number)
 	if (len < 2)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 
 	node = *stack;
-	sum = node->n + node->next->n;
+	sum = node->next->n + node->n;
 	node->next->n = sum;
 	*stack = node->next;
 	free(node);
@@ -49,6 +50,7 @@ void opcode_sub(stack_t **stack, unsigned int line_number)
 	if (len < 2)
 	{
 		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -76,6 +78,7 @@ void opcode_mul(stack_t **stack, unsigned int line_number)
 	if (len < 2)
 	{
 		fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -103,6 +106,7 @@ void opcode_div(stack_t **stack, unsigned int line_number)
 	if (len < 2)
 	{
 		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -110,6 +114,7 @@ void opcode_div(stack_t **stack, unsigned int line_number)
 	if (node->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 	div = node->next->n / node->n;
@@ -134,6 +139,7 @@ void opcode_mod(stack_t **stack, unsigned int line_number)
 	if (len < 2)
 	{
 		fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -141,6 +147,7 @@ void opcode_mod(stack_t **stack, unsigned int line_number)
 	if (node->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 	mod = node->next->n % node->n;

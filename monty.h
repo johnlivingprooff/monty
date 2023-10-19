@@ -79,5 +79,6 @@ void opcode_rotl(stack_t **stack, unsigned int line_number);
 void opcode_rotr(stack_t **stack, unsigned int line_number);
 void stck(stack_t **stack, unsigned int l_number);
 void queue(stack_t **stack, unsigned int l_number);
+void free_s(stack_t *stack);
 
 #endif /* MONTY_H */

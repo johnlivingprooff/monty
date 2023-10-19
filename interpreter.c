@@ -39,6 +39,7 @@ void interpret(char *line, stack_t **stack, unsigned int l_count, FILE *file)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", l_count, op_word);
 		fclose(file);
+		free_s(*stack);
 		free(line);
 		exit(EXIT_FAILURE);
 	}

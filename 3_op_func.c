@@ -26,12 +26,14 @@ void opcode_pchar(stack_t **stack, unsigned int line_number)
 	if (node == NULL)
 	{
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 
 	if (node->n > 127 || node->n < 0)
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 

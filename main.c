@@ -28,6 +28,7 @@ int main(int ac, char **av)
 	if (!file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+		fclose(file);
 		exit(EXIT_FAILURE);
 	}
 
@@ -38,6 +39,7 @@ int main(int ac, char **av)
 		interpret(line, &stack, line_number, file);
 	}
 
+	free_s(stack);
 	fclose(file);
 	return (EXIT_SUCCESS);
 }

@@ -14,8 +14,7 @@ void opcode_pop(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-		/*fclose(glb.file);*/
-		/*free(glb.line);*/
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -54,8 +53,7 @@ void opcode_pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-		/*fclose(glb.file);*/
-		/*free(glb.line);*/
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -76,6 +74,7 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
 	if (!stack || !(*stack) || !((*stack)->next))
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 

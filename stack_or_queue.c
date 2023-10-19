@@ -42,8 +42,7 @@ void opcode_push(stack_t **stack, unsigned int line_number)
 	if (value == 0 && num[0] != '0')
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		/*fclose(glb.file);*/
-		/*free(glb.line);*/
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 	if (p_mode)
