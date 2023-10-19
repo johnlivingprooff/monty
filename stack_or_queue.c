@@ -38,6 +38,12 @@ void opcode_push(stack_t **stack, unsigned int line_number)
 	int value;
 	char *num = strtok(NULL, " \n\t\r");
 
+	if (num == NULL)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free_s(*stack);
+		exit(EXIT_FAILURE);
+	}
 	value = atoi(num);
 	if (value == 0 && num[0] != '0')
 	{
@@ -45,6 +51,7 @@ void opcode_push(stack_t **stack, unsigned int line_number)
 		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
+
 	if (p_mode)
 		add_node_end(stack, value);
 	else
