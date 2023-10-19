@@ -38,6 +38,14 @@ int main(int ac, char **av)
 		interpret(line, &stack, line_number);
 	}
 
+	while (stack != NULL)
+	{
+		stack_t *temp;
+		temp = stack;
+		
+		stack = stack->next;
+		free(temp);
+	}
 	fclose(file);
 	return (EXIT_SUCCESS);
 }
