@@ -129,15 +129,16 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
  */
 void add(stack_t **stack, unsigned int line_cnt)
 {
+	stack_t *top,*second;
 	if (!stack || !*stack || !(*stack)->next)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_cnt);
 		/* Handle the error condition here */
 		return;
 	}
-
-	stack_t *top = *stack;
-	stack_t *second = top->next;
+	
+	top = *stack;
+	second = top->next;
 
 	second->n += top->n;
 	*stack = second;

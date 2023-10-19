@@ -9,10 +9,11 @@
 int main(int ac, char **av)
 {
 	FILE *file;
-	char *filename, *line = NULL;
+	char *filename = NULL;
+	char line[1024];
+
 	unsigned int line_number = 0;
-	ssize_t read;
-	size_t len = 0;
+	
 	stack_t *stack = NULL;
 
 	if (ac != 2)
@@ -31,7 +32,7 @@ int main(int ac, char **av)
 	}
 
 	/* read each line of the file */
-	while ((read = getline(&line, &len, file)) != -1)
+	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
 		interpret(line, &stack, line_number);
