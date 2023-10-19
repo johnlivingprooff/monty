@@ -1,30 +1,6 @@
 #include "monty.h"
 
 /**
- * opcode_push - pushes an element to the stack.
- * @stack: the linked list, reps the stack
- * @line_number: to reference the line with possible error
- */
-void opcode_push(stack_t **stack, unsigned int line_number)
-{
-	int value;
-	char *num = strtok(NULL, " \n\t\r");
-
-	value = atoi(num);
-	if (value == 0 && num[0] != '0')
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		/*fclose(glb.file);*/
-		/*free(glb.line);*/
-		exit(EXIT_FAILURE);
-	}
-	if (QUEUE)
-		add_node_end(stack, value);
-	else
-		add_node(stack, value);
-}
-
-/**
  * opcode_pop - Remove the top element from the stack
  * @stack: Double pointer to the stack
  * @line_number: Line number of the instruction
