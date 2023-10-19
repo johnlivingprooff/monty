@@ -1,25 +1,22 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "monty.h"
 
 /**
- * swap - swaps the top two elements of the stack
+ * opcode_swap - swaps the top two elements of the stack
  * @stack: double pointer to the stack
- * @line_cnt: line number
+ * @line_number: line number
  *
  * Return: void
  */
-void swap(stack_t **stack, unsigned int line_cnt)
+void opcode_swap(stack_t **stack, unsigned int line_number)
 {
+	int tmp = (*stack)->n;
+
 	if (!stack || !(*stack) || !((*stack)->next))
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", line_cnt);
-		status = EXIT_FAILURE;
-		return;
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 
-	int tmp = (*stack)->n;
 	(*stack)->n = (*stack)->next->n;
 	(*stack)->next->n = tmp;
 }

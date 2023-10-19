@@ -5,6 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ctype.h>
+#define  _POSIX_C_SOURCE 200809L
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -17,9 +24,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -32,8 +39,8 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 extern instruction_t opc[];
@@ -42,6 +49,7 @@ void opcode_push(stack_t **stack, unsigned int line_number);
 void opcode_pall(stack_t **stack, unsigned int line_number);
 void opcode_pint(stack_t **stack, unsigned int line_number);
 void opcode_pop(stack_t **stack, unsigned int line_number);
+void opcode_swap(stack_t **stack, unsigned int line_number);
 ssize_t read_line(FILE *file);
 void interpret(char *line, stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_cnt);
