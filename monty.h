@@ -50,5 +50,5 @@ void opcode_pint(stack_t **stack, unsigned int line_number);
 void opcode_pop(stack_t **stack, unsigned int line_number);
 void opcode_swap(stack_t **stack, unsigned int line_number);
 void opcode_swap(stack_t **stack, unsigned int line_cnt);
-
+void add(stack_t **stack, unsigned int line_cnt);
 #endif /* MONTY_H */
