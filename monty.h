@@ -43,6 +43,24 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+#define INSTRUCTIONS { \
+		{"push", push},\
+		{"pall", pall},\
+		{"pint", pint},\
+		{"pop", pop},\
+		{"swap", swap},\
+		{"nop", nop},\
+		{"div", _div},\
+		{"mul", _mul},\
+		{"add", _add},\
+		{"sub", _sub},\
+		{"mod", mod},\
+		{"pchar", pchar},\
+		{"pstr", pstr},\
+		{"rotl", rotl},\
+		{"rotr", rotr},\
+		{NULL, NULL} \
+}
 void interpret(char *line, stack_t **stack, unsigned int line_number);
 void opcode_push(stack_t **stack, unsigned int line_number);
 void opcode_pall(stack_t **stack, unsigned int line_number);
