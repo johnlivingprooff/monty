@@ -1,11 +1,13 @@
 #include "monty.h"
 
 /**
- * opcode_pop - remove the top element of the stack
- * @stack: double pointer to the stack
- * @line_number: line number of the instruction
+ * pop - Remove the top element from the stack
+ * @stack: Double pointer to the stack
+ * @line_number: Line number of the instruction
+ *
+ * Return: Void
  */
-void opcode_pop(stack_t **stack, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 
