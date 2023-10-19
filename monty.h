@@ -11,7 +11,8 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <ctype.h>
-#define  _POSIX_C_SOURCE 200809L
+#define STACK 1
+#define QUEUE 0
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -30,6 +31,21 @@ typedef struct stack_s
 } stack_t;
 
 /**
+ * struct globe_s - global variables
+ * @num: value as string
+ * @file: FILE* pointer
+ * @line: the content of a line in file
+ * Description: the global variables to be used throughout the program
+ */
+typedef struct glb_s
+{
+	char *num;
+	FILE *file;
+	char *line;
+	int push_m;
+} glb_t;
+extern glb_t glb;
+/**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
@@ -43,12 +59,25 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void interpret(char *line, stack_t **stack, unsigned int line_number);
+void interpret(char *line, stack_t **stack, unsigned int line_number, FILE *file);
 void opcode_push(stack_t **stack, unsigned int line_number);
+void add_node(stack_t **stack, int value);
+void add_node_end(stack_t **stack, int value);
 void opcode_pall(stack_t **stack, unsigned int line_number);
 void opcode_pint(stack_t **stack, unsigned int line_number);
 void opcode_pop(stack_t **stack, unsigned int line_number);
+void opcode_pstr(stack_t **stack, unsigned int line_number);
+void opcode_pchar(stack_t **stack, unsigned int line_number);
 void opcode_swap(stack_t **stack, unsigned int line_number);
-void opcode_swap(stack_t **stack, unsigned int line_cnt);
-void add(stack_t **stack, unsigned int line_cnt);
+void opcode_sub(stack_t **stack, unsigned int line_number);
+void opcode_mul(stack_t **stack, unsigned int line_number);
+void opcode_div(stack_t **stack, unsigned int line_number);
+void opcode_add(stack_t **stack, unsigned int line_number);
+void opcode_mod(stack_t **stack, unsigned int line_number);
+void opcode_nop(stack_t **stack, unsigned int line_number);
+void opcode_rotl(stack_t **stack, unsigned int line_number);
+void opcode_rotr(stack_t **stack, unsigned int line_number);
+void stck(stack_t **stack, unsigned int l_number);
+void queue(stack_t **stack, unsigned int l_number);
+
 #endif /* MONTY_H */

@@ -1,49 +1,6 @@
 #include "monty.h"
 
 /**
- * opcode_push - pushes an element to the stack.
- * @stack: the linked list, reps the stack
- * @line_number: to reference the line with possible error
- */
-void opcode_push(stack_t **stack, unsigned int line_number)
-{
-	stack_t *new = malloc(sizeof(stack_t));
-	char *num;
-	int value;
-
-	if (new == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-	num = strtok(NULL, " \n");
-
-	if (num == NULL)
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	value = atoi(num);
-	if (value == 0 && num[0] != '0')
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	new->n = value;
-	new->prev = NULL;
-	new->next = *stack;
-
-	if (*stack != NULL)
-		(*stack)->prev = new;
-
-	*stack = new;
-
-}
-
-/**
  * opcode_pop - Remove the top element from the stack
  * @stack: Double pointer to the stack
  * @line_number: Line number of the instruction
@@ -52,20 +9,19 @@ void opcode_push(stack_t **stack, unsigned int line_number)
  */
 void opcode_pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
+	stack_t *pop;
 
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		/*fclose(glb.file);*/
+		/*free(glb.line);*/
 		exit(EXIT_FAILURE);
 	}
 
-	temp = *stack;
-	if (temp->next != NULL)
-		temp->next->prev = NULL;
-
-	*stack = temp->next;
-	free(temp);
+	pop = *stack;
+	*stack = pop->next;
+	free(pop);
 }
 
 /**
@@ -75,11 +31,16 @@ void opcode_pop(stack_t **stack, unsigned int line_number)
  */
 void opcode_pall(stack_t **stack, unsigned int line_number)
 {
-	while (*stack != NULL)
+	stack_t *pall = *stack;
+	(void)line_number;
+
+	if (pall == NULL)
+		return;
+
+	while (pall)
 	{
-		printf("%d\n", (*stack)->n);
-		*stack = (*stack)->next;
-		line_number++;
+		printf("%d\n", pall->n);
+		pall = pall->next;
 	}
 }
 
@@ -93,6 +54,8 @@ void opcode_pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		/*fclose(glb.file);*/
+		/*free(glb.line);*/
 		exit(EXIT_FAILURE);
 	}
 
@@ -119,4 +82,3 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
 	(*stack)->n = (*stack)->next->n;
 	(*stack)->next->n = tmp;
 }
-

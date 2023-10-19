@@ -1,4 +1,6 @@
 #include "monty.h"
+#define  _POSIX_C_SOURCE 200809L
+
 
 /**
  * main - interpretes the bytecode
@@ -8,12 +10,10 @@
  */
 int main(int ac, char **av)
 {
-	FILE *file;
-	char *filename = NULL;
-	char line[1024];
-
 	unsigned int line_number = 0;
-
+	FILE *file;
+	char *line = NULL;
+	size_t len = 0;
 	stack_t *stack = NULL;
 
 	if (ac != 2)
@@ -23,29 +23,21 @@ int main(int ac, char **av)
 	}
 
 	/* Opening the monty bytecode file */
-	filename = av[1];
-	file = fopen(filename, "r");
-	if (file == NULL)
+	file = fopen(av[1], "r");
+
+	if (!file)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 
 	/* read each line of the file */
-	while (fgets(line, sizeof(line), file) != NULL)
+	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
-		interpret(line, &stack, line_number);
+		interpret(line, &stack, line_number, file);
 	}
 
-	while (stack != NULL)
-	{
-		stack_t *temp;
-		temp = stack;
-
-		stack = stack->next;
-		free(temp);
-	}
 	fclose(file);
 	return (EXIT_SUCCESS);
 }
