@@ -44,5 +44,5 @@ void opcode_pint(stack_t **stack, unsigned int line_number);
 void opcode_pop(stack_t **stack, unsigned int line_number);
 ssize_t read_line(FILE *file);
 void interpret(char *line, stack_t **stack, unsigned int line_number);
-
+void swap(stack_t **stack, unsigned int line_cnt);
 #endif /* MONTY_H */
