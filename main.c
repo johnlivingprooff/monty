@@ -42,7 +42,7 @@ int main(int ac, char **av)
 	{
 		stack_t *temp;
 		temp = stack;
-		
+
 		stack = stack->next;
 		free(temp);
 	}
