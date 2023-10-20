@@ -22,3 +22,6 @@ opcode_mod - computes the rest of the division
  opcode_nop - does nothing
 
  opcode_pchar - prints the char at the top of the stack
+
+opcode_pstr - prints the string starting
+
