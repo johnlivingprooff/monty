@@ -10,3 +10,5 @@ opcode_pall - prints all the values on the stack, top to bottom
 opcode_pint - prints the value at the top of the stack
 
  opcode_swap - swaps the top two elements of the stack
+
+ opcode_sub - subtracts the top element of the stack from
