@@ -24,10 +24,9 @@ void interpret(char *line, stack_t **stack, unsigned int l_count, FILE *file)
 	};
 
 	op_word = strtok(line, " \n\t\r");
+
 	if (op_word && op_word[0] == '#') /* for comments */
 		return;
-
-	/*glb.num = strtok(NULL, " \n\t\r");  define global num */
 
 	while (op_word && opc[i].opcode)
 	{
@@ -35,12 +34,12 @@ void interpret(char *line, stack_t **stack, unsigned int l_count, FILE *file)
 			opc[i].f(stack, l_count);
 		i++;
 	}
-	if (opc[i].opcode == NULL && !op_word)
+	if (op_word && opc[i].opcode == NULL)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", l_count, op_word);
 		fclose(file);
-		free_s(*stack);
 		free(line);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 }
