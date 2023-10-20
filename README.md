@@ -12,3 +12,5 @@ opcode_pint - prints the value at the top of the stack
  opcode_swap - swaps the top two elements of the stack
 
  opcode_sub - subtracts the top element of the stack from
+
+opcode_mul - multiplies the second top element of the stack
