@@ -31,15 +31,16 @@ void interpret(char *line, stack_t **stack, unsigned int l_count, FILE *file)
 	while (op_word && opc[i].opcode)
 	{
 		if (strcmp(op_word, opc[i].opcode) == 0)
+		{
 			opc[i].f(stack, l_count);
+			return;
+		}
 		i++;
 	}
-	if (!op_word && opc[i].opcode == NULL)
-	{
+	if (op_word != NULL)
 		fprintf(stderr, "L%u: unknown instruction %s\n", l_count, op_word);
-		fclose(file);
-		free(line);
-		free_s(*stack);
-		exit(EXIT_FAILURE);
-	}
+	fclose(file);
+	free(line);
+	free_s(*stack);
+	exit(EXIT_FAILURE);
 }
