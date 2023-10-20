@@ -30,17 +30,15 @@ void opcode_pop(stack_t **stack, unsigned int line_number)
  */
 void opcode_pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *pall = *stack;
+	stack_t *pall;
 	(void)line_number;
 
-	if (pall == NULL)
+	if (!stack || !(*stack))
 		return;
 
-	while (pall)
-	{
+	pall = *stack;
+	for (; pall != NULL; pall = pall->next)
 		printf("%d\n", pall->n);
-		pall = pall->next;
-	}
 }
 
 /**
