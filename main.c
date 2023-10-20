@@ -40,6 +40,7 @@ int main(int ac, char **av)
 	}
 
 	free_s(stack);
+	free(line);
 	fclose(file);
 	return (EXIT_SUCCESS);
 }
