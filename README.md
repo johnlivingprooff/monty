@@ -30,3 +30,6 @@ opcode_pstr - prints the string starting
 opcode_rotr - rotates the stack to the bottom
 
 add_node - adds node for stack (LIFO)
+
+add_node_end - adds node for queue (FIFO)
+
