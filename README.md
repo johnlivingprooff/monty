@@ -14,3 +14,5 @@ opcode_pint - prints the value at the top of the stack
  opcode_sub - subtracts the top element of the stack from
 
 opcode_mul - multiplies the second top element of the stack
+
+opcode_div - divides the second top element of the stack
