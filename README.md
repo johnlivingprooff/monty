@@ -8,3 +8,5 @@ opcode_pop - Remove the top element from the stack
 opcode_pall - prints all the values on the stack, top to bottom
 
 opcode_pint - prints the value at the top of the stack
+
+ opcode_swap - swaps the top two elements of the stack
