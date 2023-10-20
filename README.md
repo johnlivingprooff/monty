@@ -20,3 +20,5 @@ opcode_div - divides the second top element of the stack
 opcode_mod - computes the rest of the division
 
  opcode_nop - does nothing
+
+ opcode_pchar - prints the char at the top of the stack
