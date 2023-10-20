@@ -27,3 +27,5 @@ opcode_rotl - rotates the stack to the top.
 
 opcode_pstr - prints the string starting
 
+opcode_rotr - rotates the stack to the bottom
+
