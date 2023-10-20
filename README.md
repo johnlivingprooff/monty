@@ -3,3 +3,4 @@
 
 _Written by Tigist G. & John-Livingprooff_
 
+opcode_pop - Remove the top element from the stack
