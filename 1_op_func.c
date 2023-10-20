@@ -69,7 +69,8 @@ void opcode_pint(stack_t **stack, unsigned int line_number)
  */
 void opcode_swap(stack_t **stack, unsigned int line_number)
 {
-	int tmp = (*stack)->n;
+	int tmp;
+	stack_t *first, *second;
 
 	if (!stack || !(*stack) || !((*stack)->next))
 	{
@@ -78,6 +79,10 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = tmp;
+	first = *stack;
+	second = first->next;
+
+	tmp = first->n;
+	first->n = second->n;
+	second->n = tmp;
 }
