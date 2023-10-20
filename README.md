@@ -33,3 +33,4 @@ add_node - adds node for stack (LIFO)
 
 add_node_end - adds node for queue (FIFO)
 
+stck - follows LIFO structure
