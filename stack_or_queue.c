@@ -38,6 +38,8 @@ void opcode_push(stack_t **stack, unsigned int line_number)
 	int value;
 	char *num = strtok(NULL, " \n\t\r");
 
+	if (!stack)
+		exit(EXIT_FAILURE);
 	if (num == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
