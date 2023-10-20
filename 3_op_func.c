@@ -53,7 +53,7 @@ void opcode_pstr(stack_t **stack, unsigned int line_number)
 
 	while (node)
 	{
-		if (node->n > 127 || node->n < 0)
+		if (node->n > 127 || node->n < 1)
 			break;
 		printf("%c", node->n);
 		node = node->next;
